@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VAULT — Secure Stego</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230C0E0A'/><path d='M16 3 L27 7 v10 c0 6-5 10-11 12-6-2-11-6-11-12V7z' fill='none' stroke='%236B7A3A' stroke-width='2'/><path d='M11 11 l5 12 5-12' fill='none' stroke='%23C9A227' stroke-width='2.5' stroke-linecap='square'/></svg>"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&family=Barlow+Condensed:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="classification-bar top">
+      CLASSIFIED // HANDLE VIA SECURE CHANNELS ONLY
+    </div>
+
+    <div class="console">
+      <div class="header">
+        <div class="header-left">
+          <div class="title">VAULT</div>
+          <div class="subtitle">Encrypted payload concealment system</div>
+        </div>
+        <div class="header-right">
+          <div class="stamp">OPERATIONAL</div>
+          <div class="unit-id">UNIT / LSB-AES-256</div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="encode">01 — Conceal</button>
+        <button class="tab-btn" data-tab="decode">02 — Recover</button>
+      </div>
+
+      <!-- ENCODE TAB -->
+      <div class="tab-pane active" id="encode-pane">
+        <div class="pane-grid">
+          <div class="col">
+            <label class="field-label">Carrier image</label>
+            <input type="file" id="encode-image-input" accept="image/*" />
+            <div class="preview-box" id="encode-preview">NO CARRIER LOADED</div>
+          </div>
+          <div class="col">
+            <label class="field-label">Payload text</label>
+            <textarea
+              id="message-input"
+              rows="5"
+              placeholder="Enter message for concealment..."
+            ></textarea>
+
+            <div class="meter-row">
+              <label class="field-label meter-label">Carrier load</label>
+              <div class="meter-track">
+                <div class="meter-fill" id="capacity-fill"></div>
+                <div class="meter-ticks"></div>
+              </div>
+              <div class="meter-text" id="capacity-text">AWAITING CARRIER</div>
+            </div>
+
+            <label class="field-label">Cipher key</label>
+            <input
+              type="password"
+              id="encode-password-input"
+              placeholder="Enter passphrase"
+            />
+
+            <button class="action-btn" id="hide-btn">Execute Conceal</button>
+            <div class="status-line" id="encode-status"></div>
+
+            <div class="result-box" id="encode-result" hidden>
+              <img id="result-preview" alt="Encoded carrier preview" />
+              <a
+                id="download-link"
+                class="download-btn"
+                download="vault-encoded.png"
+                >Retrieve Encoded Carrier</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DECODE TAB -->
+      <div class="tab-pane" id="decode-pane">
+        <div class="pane-grid">
+          <div class="col">
+            <label class="field-label">Encoded carrier</label>
+            <input type="file" id="decode-image-input" accept="image/*" />
+            <div class="preview-box" id="decode-preview">NO CARRIER LOADED</div>
+          </div>
+          <div class="col">
+            <label class="field-label">Cipher key</label>
+            <input
+              type="password"
+              id="decode-password-input"
+              placeholder="Enter passphrase"
+            />
+
+            <button class="action-btn" id="reveal-btn">Execute Recover</button>
+            <div class="status-line" id="decode-status"></div>
+
+            <label class="field-label">Recovered payload</label>
+            <textarea
+              id="decoded-output"
+              rows="6"
+              readonly
+              placeholder="Recovered payload will display here..."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="classification-bar bottom">
+      CLASSIFIED // HANDLE VIA SECURE CHANNELS ONLY
+    </div>
+
+    <canvas id="work-canvas" hidden></canvas>
+    <script src="script.js"></script>
+  </body>
+</html>
